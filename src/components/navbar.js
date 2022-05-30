@@ -1,10 +1,9 @@
 import React from "react";
+import NavBarItem from "./navbaritem";
 
 function Navbar() {
   return (
-    <div
-      class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary"
-    >
+    <div class="navbar navbar-expand-lg fixed-top navbar-dark bg-primary">
       <div class="container">
         <a href="https://bootswatch.com/" class="navbar-brand">
           Minhas Finanças
@@ -22,26 +21,10 @@ function Navbar() {
         </button>
         <div className="collapse navbar-collapse" id="navbarResponsive">
           <ul className="navbar-nav">
-            <li className="nav-item">
-              <a className="nav-link" href="home.html">
-                Home
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="usuarios.html">
-                Usuários
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="lancamentos.html">
-                Lançamentos
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link" href="login.html">
-                Login
-              </a>
-            </li>
+            <NavBarItem href="#/" label="Home" />
+            <NavBarItem href="#/cadastro-usuarios" label="Usuários" />
+            <NavBarItem href="#/lancamentos" label="Lançamentos" />
+            <NavBarItem href="#/login" label="Login" />
           </ul>
         </div>
       </div>
@@ -49,4 +32,4 @@ function Navbar() {
   );
 }
 
-export default Navbar
+export default Navbar;
