@@ -19,6 +19,15 @@ class CadastroUsuario extends React.Component {
   }
 
   cadastrar = () => {
+    const msgs = this.validar();
+
+    if(msgs && msgs.length > 0){
+      msgs.forEach((msg, index) =>{
+        mensagemErro(msg);
+      })
+      return false;
+    }
+
     const usuario = {
       nome: this.state.nome,
       email: this.state.email,
@@ -36,6 +45,28 @@ class CadastroUsuario extends React.Component {
         mensagemErro(erro.response.data);
       });
   };
+
+  validar() {
+    const msgs = [];
+
+    if (!this.state.nome) {
+      msgs.push("O campo Nome é obrigatório.");
+    }
+
+    if (!this.state.email) {
+      msgs.push("O campo Email é obrigatório.");
+    } else if (!this.state.email.match(/^[a-z0-9.]+@[a-z0-9]+\.[a-z]/)) {
+      msgs.push("Insira um email válido");
+    }
+
+    if (!this.state.senha || !this.state.senhaRepeticao) {
+      msgs.push("Digite a senha e a confirmação da senha.");
+    } else if (this.state.senha !== this.state.senhaRepeticao) {
+      msgs.push("As campos Senha e Confirmar senha não conferem.");
+    }
+
+    return msgs;
+  }
 
   cancelar = () => {
     this.props.history.push("/login");
