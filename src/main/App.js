@@ -1,5 +1,7 @@
 import "bootswatch/dist/flatly/bootstrap.css";
 import React from "react";
+import "toastr/build/toastr.css";
+import "toastr/build/toastr.min.js";
 import Navbar from "../components/navbar";
 import "../custom.css";
 import Rotas from "./rotas";
@@ -13,7 +15,7 @@ class App extends React.Component {
           <Rotas />
         </div>
       </>
-    )
+    );
   }
 }
 export default App;
