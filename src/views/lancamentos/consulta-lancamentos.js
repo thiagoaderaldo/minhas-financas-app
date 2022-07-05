@@ -6,6 +6,16 @@ import SelectMenu from "../../components/selectMenu";
 import LancamentosTable from "./lancamentosTable";
 
 class ConsultaLancamentos extends React.Component {
+  state = {
+    ano: "",
+    mes: "",
+    tipo: "",
+  };
+
+  buscar = () => {
+    console.log(this.state);
+  };
+
   render() {
     const meses = [
       { label: "Selecione...", value: "" },
@@ -30,8 +40,15 @@ class ConsultaLancamentos extends React.Component {
     ];
 
     const lancamentos = [
-      {id: 1, descricao: "Salário", valor: 5000, mes: 1, tipo: "Receita", status: "Efetivado"}
-    ]
+      {
+        id: 1,
+        descricao: "Salário",
+        valor: 5000,
+        mes: 1,
+        tipo: "Receita",
+        status: "Efetivado",
+      },
+    ];
 
     return (
       <Card title="Consultar lançamentos">
@@ -43,17 +60,35 @@ class ConsultaLancamentos extends React.Component {
                   type="text"
                   className="form-control"
                   id="inputAno"
+                  value={this.state.ano}
+                  onChange={(e) => this.setState({ ano: e.target.value })}
                   placeholder="Digite o ano"
                 />
               </FormGroup>
               <FormGroup htmlFor="inputMes" label="Mês: ">
-                <SelectMenu className="form-control" lista={meses} />
+                <SelectMenu
+                  id="inputMes"
+                  className="form-control"
+                  lista={meses}
+                  value={this.state.mes}
+                  onChange={(e) => this.setState({ mes: e.target.value })}
+                />
               </FormGroup>
               <FormGroup htmlFor="inputTipo" label="Tipo de lançamento: ">
-                <SelectMenu className="form-control" lista={tipos} />
+                <SelectMenu
+                  id="inputTipo"
+                  className="form-control"
+                  value={this.state.tipo}
+                  onChange={(e) => this.setState({ tipo: e.target.value })}
+                  lista={tipos}
+                />
               </FormGroup>
 
-              <button type="button" className="btn btn-success">
+              <button
+                onClick={this.buscar}
+                type="button"
+                className="btn btn-success"
+              >
                 Buscar
               </button>
               <button type="button" className="btn btn-danger">
@@ -66,7 +101,7 @@ class ConsultaLancamentos extends React.Component {
         <div className="row">
           <div className="col-md-12">
             <div className="bs-component">
-              <LancamentosTable lancamentos={lancamentos}/>
+              <LancamentosTable lancamentos={lancamentos} />
             </div>
           </div>
         </div>
