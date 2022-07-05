@@ -8,7 +8,7 @@ class ConsultaLancamentos extends React.Component{
 
     render(){
 
-        const lista = [
+        const meses = [
             {label: "Selecione...", value: ""},
             {label: "Janeiro", value: 1},
             {label: "Fevereiro", value: 2},
@@ -24,6 +24,12 @@ class ConsultaLancamentos extends React.Component{
             {label: "Dezembro", value: 12}
         ]
 
+        const tipos = [
+            {label: "Selecione...", value: ""},
+            {label: "Receita", value: "RECEITA"},
+            {label: "Despesa", value: "DESPESA"}
+        ]
+
         return(
             <Card title="Consultar lançamentos">
                 <div className="row">
@@ -32,13 +38,16 @@ class ConsultaLancamentos extends React.Component{
                             <FormGroup label="Ano: *" htmlFor="inputAno">
                                 <input 
                                     type="text"
-                                    class="form-control"
+                                    className="form-control"
                                     id="inputAno"
                                     placeholder="Digite o ano"    
                                 />
                             </FormGroup>
                             <FormGroup htmlFor="inputMes" label="Mês: ">
-                                <SelectMenu className="form-control" lista={lista} />
+                                <SelectMenu className="form-control" lista={meses} />
+                            </FormGroup>
+                            <FormGroup htmlFor="inputTipo" label="Tipo de lançamento: ">
+                                <SelectMenu className="form-control" lista={tipos} />
                             </FormGroup>
                         </div>
                     </div>
