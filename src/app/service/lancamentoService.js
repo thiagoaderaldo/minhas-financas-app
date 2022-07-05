@@ -12,10 +12,13 @@ export default class LancamentoService extends ApiService {
       params = `${params}&mes=${lancamentoFiltro.mes}`;
     }
     if (lancamentoFiltro.tipo) {
-      params = `${params}&tipo=${lancamentoFiltro.mes}`;
+      params = `${params}&tipo=${lancamentoFiltro.tipo}`;
     }
     if (lancamentoFiltro.status) {
-      params = `${params}&status=${lancamentoFiltro.mes}`;
+      params = `${params}&status=${lancamentoFiltro.status}`;
+    }
+    if (lancamentoFiltro.usuario) {
+      params = `${params}&usuario=${lancamentoFiltro.usuario}`;
     }
 
     return this.get(params);
