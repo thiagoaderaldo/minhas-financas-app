@@ -6,22 +6,29 @@ import SelectMenu from "../../components/selectMenu";
 import LancamentosTable from "./lancamentosTable";
 import LancamentoService from "../../app/service/lancamentoService";
 import LocalStorageService from "../../app/service/localstorageService";
+import * as messages from "../../components/toastr"
 
 class ConsultaLancamentos extends React.Component {
   state = {
     ano: "",
     mes: "",
     tipo: "",
+    descricao: "",
     lancamentos: [],
   };
 
   buscar = () => {
+    if(!this.state.ano){
+      messages.mensagemErro("É necessário preencher o campo Ano")
+      return false;
+    }
     const usuarioLogado = LocalStorageService.obterItem("_usuario_logado");
 
     const lancamentoFiltro = {
       ano: this.state.ano,
       mes: this.state.mes,
       tipo: this.state.tipo,
+      descricao: this.state.descricao,
       usuario: usuarioLogado.id,
     };
 
@@ -41,27 +48,9 @@ class ConsultaLancamentos extends React.Component {
   }
 
   render() {
-    const meses = [
-      { label: "Selecione...", value: "" },
-      { label: "Janeiro", value: 1 },
-      { label: "Fevereiro", value: 2 },
-      { label: "Março", value: 3 },
-      { label: "Abril", value: 4 },
-      { label: "Maio", value: 5 },
-      { label: "Junho", value: 6 },
-      { label: "Julho", value: 7 },
-      { label: "Agosto", value: 8 },
-      { label: "Setembro", value: 9 },
-      { label: "Outubro", value: 10 },
-      { label: "Novembro", value: 11 },
-      { label: "Dezembro", value: 12 },
-    ];
+    const meses = this.service.obterListaMeses();
 
-    const tipos = [
-      { label: "Selecione...", value: "" },
-      { label: "Receita", value: "RECEITA" },
-      { label: "Despesa", value: "DESPESA" },
-    ];
+    const tipos = this.service.obterListaTipos();
 
     return (
       <Card title="Consultar lançamentos">
@@ -85,6 +74,16 @@ class ConsultaLancamentos extends React.Component {
                   lista={meses}
                   value={this.state.mes}
                   onChange={(e) => this.setState({ mes: e.target.value })}
+                />
+              </FormGroup>
+              <FormGroup htmlFor="inputDescricao" label="Descrição: ">
+                <input
+                  id="inputDescricao"
+                  type="text"
+                  className="form-control"
+                  value={this.state.descricao}
+                  onChange={(e) => this.setState({ descricao: e.target.value })}
+                  placeholder="Digite a descrição"
                 />
               </FormGroup>
               <FormGroup htmlFor="inputTipo" label="Tipo de lançamento: ">
