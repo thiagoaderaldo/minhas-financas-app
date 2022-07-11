@@ -6,7 +6,7 @@ import SelectMenu from "../../components/selectMenu";
 import LancamentosTable from "./lancamentosTable";
 import LancamentoService from "../../app/service/lancamentoService";
 import LocalStorageService from "../../app/service/localstorageService";
-import * as messages from "../../components/toastr"
+import * as messages from "../../components/toastr";
 
 class ConsultaLancamentos extends React.Component {
   state = {
@@ -17,9 +17,17 @@ class ConsultaLancamentos extends React.Component {
     lancamentos: [],
   };
 
+  editar = (id) => {
+    console.log("Editar lançamento: ", id);
+  };
+
+  deletar = (id) => {
+    console.log("Deletar lançamento: ", id);
+  };
+
   buscar = () => {
-    if(!this.state.ano){
-      messages.mensagemErro("É necessário preencher o campo Ano")
+    if (!this.state.ano) {
+      messages.mensagemErro("É necessário preencher o campo Ano");
       return false;
     }
     const usuarioLogado = LocalStorageService.obterItem("_usuario_logado");
@@ -113,7 +121,11 @@ class ConsultaLancamentos extends React.Component {
         <div className="row">
           <div className="col-md-12">
             <div className="bs-component">
-              <LancamentosTable lancamentos={this.state.lancamentos} />
+              <LancamentosTable
+                lancamentos={this.state.lancamentos}
+                deleteAction={this.deletar}
+                editAction={this.editar}
+              />
             </div>
           </div>
         </div>
