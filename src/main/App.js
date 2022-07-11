@@ -6,6 +6,10 @@ import Navbar from "../components/navbar";
 import "../custom.css";
 import Rotas from "./rotas";
 
+import "primereact/resources/themes/nova-light/theme.css"
+import "primereact/resources/primereact.min.css"
+import "primeicons/primeicons.css"
+
 class App extends React.Component {
   render() {
     return (
