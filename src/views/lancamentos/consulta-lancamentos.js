@@ -21,8 +21,19 @@ class ConsultaLancamentos extends React.Component {
     console.log("Editar lançamento: ", id);
   };
 
-  deletar = (id) => {
-    console.log("Deletar lançamento: ", id);
+  deletar = (lancamento) => {
+    this.service
+      .deletar(lancamento.id)
+      .then(response => {
+        const lancamentos = this.state.lancamentos
+        const index =  lancamentos.indexOf(lancamento)
+        lancamentos.splice(index, 1)
+        this.setState(lancamentos)
+        messages.mensagemSucesso("Lançamento deletado com sucesso!")
+      })
+      .catch(erro => {
+        messages.mensagemErro("Ocorreu um erro ao tentar deletar o lançamento.")
+      })
   };
 
   buscar = () => {
